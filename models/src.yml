@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: DBT
+    database: DBT
+    schema: DBT_016_2
+    tables:
+      - name: CUST
+        identifier: customers
+      - name: ORDE
+        identifier: orders
+      - name: ORIT
+        identifier: orderitems
+        columns:
+          - name: UNITPRICE
+            tests:
+            - counts_positive   
