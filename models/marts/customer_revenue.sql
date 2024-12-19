@@ -1,0 +1,23 @@
+with customerrevenue as (
+    SELECT
+        C.CUSTOMERID,
+        C.CUSTOMERNAME,
+        COALESCE(CI.CUSTOMERINFO,'NOINFO') AS CUSTOMERINFO,
+        COALESCE(COUNT(DISTINCT O.ORDERID),0) AS ORDERNB,
+        COALESCE(COUNT(DISTINCT I.ORDERITEMID),0) AS ITEMDISTINCTNB,
+        COALESCE(SUM(I.QUANTITY),0) AS ITEMNB,
+        COALESCE(SUM(I.QUANTITY*I.UNITPRICE),0) AS TOTALPRICE
+    FROM {{ref('stg_customer')}} C
+    LEFT JOIN {{ref('stg_order')}} O 
+    ON C.CUSTOMERID = O.CUSTOMERID
+    LEFT JOIN {{ref('stg_orderitem')}} I
+    ON O.ORDERID = I.ORDERID
+    LEFT JOIN {{ref('customerinfo')}} CI
+    ON C.CUSTOMERID = CI.CUSTOMERID
+    GROUP BY
+        C.CUSTOMERID,
+        C.CUSTOMERNAME,
+        CI.CUSTOMERINFO
+)
+
+SELECT * FROM customerrevenue

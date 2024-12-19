@@ -1,0 +1,9 @@
+models:
+  - name: customer_revenue
+    columns:
+      - name: ORDERNB
+        tests:
+          - counts_positive
+      - name: ITEMNB
+        tests:
+          - counts_positive   
