@@ -1,9 +1,12 @@
 models:
   - name: customer_revenue
+    description: This is the revnue table obviously!!!
     columns:
       - name: ORDERNB
+        description: This is the count of order (I thought the name was clear to avoid needing docs, but apparently for some idiots, it is not) !!!!!
         tests:
           - counts_positive
       - name: ITEMNB
+        description: "{{doc('Example')}}"
         tests:
           - counts_positive   

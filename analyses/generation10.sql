@@ -1,0 +1,1 @@
+{{generating_numbers(10)}}
